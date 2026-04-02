@@ -1,0 +1,34 @@
+info:
+  name: Post aktualisieren (PUT)
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{baseUrl}}/posts/1"
+  body:
+    type: json
+    data: '{ "id": 1, "title": "Update", "body": "Neuer Inhalt", "userId": 1 }'
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Status ist 200 OK", function() {
+          expect(res.getStatus()).to.equal(200);
+        });
+
+
+        test("Aktualisierte Daten sind in Response", function() {
+          const body = res.getBody();
+          expect(body.title).to.equal("Update");
+          expect(body.body).to.equal("Neuer Inhalt");
+          expect(body.userId).to.equal(1);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
