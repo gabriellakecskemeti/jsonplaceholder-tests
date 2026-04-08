@@ -1,7 +1,7 @@
 info:
-  name: Post löschen (DELETE)
+  name: "Delete Post "
   type: http
-  seq: 6
+  seq: 5
 
 http:
   method: DELETE
@@ -12,7 +12,7 @@ runtime:
   scripts:
     - type: tests
       code: |-
-        test("Status ist 200 OK", function() {
+        test("Status is 200 OK", function() {
           expect(res.getStatus()).to.equal(200);
         });
 

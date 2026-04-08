@@ -1,0 +1,51 @@
+info:
+  name: State verification pattern2
+  type: http
+  seq: 11
+
+http:
+  method: PATCH
+  url: "{{baseUrl}}/posts/1"
+  body:
+    type: json
+    data: '{ "title": "Nur Titel geändert" }'
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Originalwerte speichern
+        const body = res.getBody();
+        bru.setVar("originalTitle", body.title);
+        bru.setVar("originalBody", body.body);
+        bru.setVar("originalUserId", body.userId);
+        console.log("Original-Titel: " + body.title);
+    - type: tests
+      code: |-
+        test("Status ist 200", function() {
+          expect(res.getStatus()).to.equal(200);
+        });
+
+        test("Titel wurde geändert", function() {
+          const body = res.getBody();
+          expect(body.title).to.equal("Nur Titel geändert");
+        });
+
+        test("Body blieb unverändert", function() {
+          const body = res.getBody();
+          const originalBody = bru.getVar("originalBody");
+          expect(body.body).to.equal(originalBody);
+        });
+
+        test("UserId blieb unverändert", function() {
+          const body = res.getBody();
+          const originalUserId = bru.getVar("originalUserId");
+          expect(body.userId).to.equal(originalUserId);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

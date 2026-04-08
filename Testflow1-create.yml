@@ -1,0 +1,30 @@
+info:
+  name: Testflow1-create
+  type: http
+  seq: 13
+
+http:
+  method: POST
+  url: "{{baseUrl}}/posts"
+  body:
+    type: json
+    data: '{ "title": "E2E Test Post", "body": "Wird erstellt und gelöscht", "userId": 1 }'
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        bru.setVar("e2ePostId", res.getBody().id);
+        console.log("e2ePostId: " + res.getBody().id);
+    - type: tests
+      code: |-
+        test("POST: Status 201", function() {
+          expect(res.getStatus()).to.equal(201);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

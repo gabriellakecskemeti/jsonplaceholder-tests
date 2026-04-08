@@ -1,7 +1,7 @@
 info:
-  name: Nicht existierende Ressource (404)
+  name: Ressource does not exist (404)
   type: http
-  seq: 7
+  seq: 6
 
 http:
   method: GET

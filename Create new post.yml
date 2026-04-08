@@ -1,33 +1,33 @@
 info:
-  name: Neuen Post erstellen (POST)
+  name: Create new post
   type: http
-  seq: 3
+  seq: 2
 
 http:
   method: POST
   url: "{{baseUrl}}/posts"
   body:
     type: json
-    data: '{ "title": "Mein Test", "body": "Inhalt", "userId": 1 }'
+    data: '{ "title": "My Test", "body": "IContent", "userId": 1 }'
   auth: inherit
 
 runtime:
   scripts:
     - type: tests
       code: |-
-        test("Status ist 201 Created", function() {
+        test("Status is 201 Created", function() {
           expect(res.getStatus()).to.equal(201);
         });
 
-        test("Neue ID wurde vergeben", function() {
+        test("New ID was assigned", function() {
           const body = res.getBody();
           expect(body).to.have.property("id");
           expect(body.id).to.equal(101);
         });
 
-        test("Gesendete Daten sind in Response", function() {
+        test("Sent data are in the response", function() {
           const body = res.getBody();
-          expect(body.title).to.equal("Mein Test");
+          expect(body.title).to.equal("My Test");
           expect(body.userId).to.equal(1);
         });
 

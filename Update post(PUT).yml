@@ -1,29 +1,29 @@
 info:
-  name: Post aktualisieren (PUT)
+  name: Update post(PUT)
   type: http
-  seq: 4
+  seq: 3
 
 http:
   method: PUT
   url: "{{baseUrl}}/posts/1"
   body:
     type: json
-    data: '{ "id": 1, "title": "Update", "body": "Neuer Inhalt", "userId": 1 }'
+    data: '{ "id": 1, "title": "Update", "body": "New content", "userId": 1 }'
   auth: inherit
 
 runtime:
   scripts:
     - type: tests
       code: |-
-        test("Status ist 200 OK", function() {
+        test("Status is 200 OK", function() {
           expect(res.getStatus()).to.equal(200);
         });
 
 
-        test("Aktualisierte Daten sind in Response", function() {
+        test("Updated data is in the response", function() {
           const body = res.getBody();
           expect(body.title).to.equal("Update");
-          expect(body.body).to.equal("Neuer Inhalt");
+          expect(body.body).to.equal("New content");
           expect(body.userId).to.equal(1);
         });
 

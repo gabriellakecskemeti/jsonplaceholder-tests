@@ -1,7 +1,7 @@
 info:
-  name: Einzelnen Post abrufen (GET by ID)
+  name: GET one post by ID
   type: http
-  seq: 2
+  seq: 1
 
 http:
   method: GET
@@ -12,16 +12,16 @@ runtime:
   scripts:
     - type: tests
       code: |-
-        test("Status ist 200", function() {
+        test("Status is 200", function() {
           expect(res.getStatus()).to.equal(200);
         });
 
-        test("Post hat ID 1", function() {
+        test("Post has ID 1", function() {
           const body = res.getBody();
           expect(body.id).to.equal(1);
         });
 
-        test("Post ist ein Objekt mit allen Feldern", function() {
+        test("Post is one Object with all Fields", function() {
           const body = res.getBody();
           expect(body).to.be.an("object");
           expect(body).to.have.all.keys("userId","id","title","body");

@@ -1,14 +1,14 @@
 info:
-  name: Post teilweise ändern (PATCH)
+  name: Change part of post (PATCH)
   type: http
-  seq: 5
+  seq: 4
 
 http:
   method: PATCH
   url: "{{baseUrl}}/posts/1"
   body:
     type: json
-    data: '{ "title": "Nur Titel geändert" }'
+    data: '{ "title": "Only titel is changed" }'
   auth: inherit
 
 runtime:
@@ -20,9 +20,9 @@ runtime:
         });
 
 
-        test("Aktualisierte Daten sind in Response", function() {
+        test("Updated data are in Respond", function() {
           const body = res.getBody();
-          expect(body.title).to.equal("Nur Titel geändert");
+          expect(body.title).to.equal("Only titel is changed");
           expect(body.body).to.equal("quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto");
           expect(body.userId).to.equal(1);
         });

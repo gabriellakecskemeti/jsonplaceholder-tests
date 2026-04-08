@@ -1,7 +1,7 @@
 info:
-  name: Ungultige Route (404)
+  name: Invalide Route (404)
   type: http
-  seq: 8
+  seq: 7
 
 http:
   method: GET
