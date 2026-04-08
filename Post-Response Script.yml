@@ -1,0 +1,39 @@
+info:
+  name: "Post-Response Script "
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{baseUrl}}/posts"
+  body:
+    type: json
+    data: '{ "title": "Variable Test", "body": "Inhalt", "userId": 1 }'
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        // Wert aus Response extrahieren und als Variable speichern
+        const body = res.getBody();
+        const newId = body.id;
+        bru.setVar("createdPostId", newId);
+        console.log("Gespeicherte ID: " + newId);
+    - type: tests
+      code: |-
+        test("Status ist 201", function() {
+          expect(res.getStatus()).to.equal(201);
+        });
+
+        test("ID wurde vergeben", function() {
+          const body = res.getBody();
+          expect(body).to.have.property("id");
+          expect(body.id).to.be.a("number");
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
