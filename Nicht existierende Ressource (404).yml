@@ -1,0 +1,28 @@
+info:
+  name: Nicht existierende Ressource (404)
+  type: http
+  seq: 7
+
+http:
+  method: GET
+  url: "{{baseUrl}}/posts/9999"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        test("Status ist 404 NOT FOUND", function() {
+          expect(res.getStatus()).to.equal(404);
+        });
+
+        test("Body leer", function() {
+          const body = res.getBody();
+          expect(Object.keys(body)).to.have.length(0);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
