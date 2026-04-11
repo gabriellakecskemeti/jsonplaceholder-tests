@@ -1,5 +1,5 @@
 info:
-  name: Change part of post (PATCH)
+  name: 04-PATCH-Change-part-of-post
   type: http
   seq: 4
 

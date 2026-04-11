@@ -1,5 +1,5 @@
 info:
-  name: Update post(PUT)
+  name: 03-PUT-Update-post
   type: http
   seq: 3
 

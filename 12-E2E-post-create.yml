@@ -1,5 +1,5 @@
 info:
-  name: Testflow1-create
+  name: 12-E2E-post-create
   type: http
   seq: 13
 

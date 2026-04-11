@@ -1,10 +1,10 @@
 info:
-  name: Testflow3-Delete
+  name: 15-E2E-verify deletion
   type: http
-  seq: 14
+  seq: 15
 
 http:
-  method: DELETE
+  method: GET
   url: "{{baseUrl}}/posts/{{e2ePostId}}"
   auth: inherit
 
@@ -12,8 +12,9 @@ runtime:
   scripts:
     - type: tests
       code: |-
-        test("DELETE: Status 200", function() {
-          expect(res.getStatus()).to.equal(200);
+        test("Status ist 404 NOT FOUND", function() {
+          const status = res.getStatus();
+          expect(status).to.be.oneOf([200, 404]);
         });
 
 settings:

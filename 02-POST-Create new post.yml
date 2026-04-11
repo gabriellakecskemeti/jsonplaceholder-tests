@@ -1,5 +1,5 @@
 info:
-  name: Create new post
+  name: 02-POST-Create new post
   type: http
   seq: 2
 

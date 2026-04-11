@@ -1,21 +1,20 @@
 info:
-  name: "Delete Post "
+  name: 06-GET-Ressource not found
   type: http
-  seq: 5
+  seq: 6
 
 http:
-  method: DELETE
-  url: "{{baseUrl}}/posts/1"
+  method: GET
+  url: "{{baseUrl}}/posts/9999"
   auth: inherit
 
 runtime:
   scripts:
     - type: tests
       code: |-
-        test("Status is 200 OK", function() {
-          expect(res.getStatus()).to.equal(200);
+        test("Status ist 404 NOT FOUND", function() {
+          expect(res.getStatus()).to.equal(404);
         });
-
 
         test("Body leer", function() {
           const body = res.getBody();

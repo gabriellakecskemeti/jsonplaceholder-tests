@@ -1,5 +1,5 @@
 info:
-  name: Testflow2-read
+  name: 13-E2E-get read
   type: http
   seq: 14
 
