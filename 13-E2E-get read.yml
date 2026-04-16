@@ -1,7 +1,7 @@
 info:
   name: 13-E2E-get read
   type: http
-  seq: 14
+  seq: 13
 
 http:
   method: GET

@@ -1,0 +1,34 @@
+info:
+  name: 16-Equivalence-class-test
+  type: http
+  seq: 16
+
+http:
+  method: GET
+  url: "{{baseUrl}}/users"
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: tests
+      code: |-
+        //quiry about existing values
+        test("List all valid IDs", function() {
+          const body = res.getBody();
+          const tabelle = body.map(function(user) {
+            return { ID: user.id, Name: user.name };
+          });
+          console.log(JSON.stringify(tabelle));
+          const allIds = body.map(id=> id.id);
+          const maxId = Math.max(...allIds);
+          const minId = Math.min(...allIds);
+          bru.setVar("maxId", maxId);
+          bru.setVar("minId", minId);
+          console.log("Lowest Id:",minId, "Highest ID:", maxId, "Number of all Users:",allIds.length);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
